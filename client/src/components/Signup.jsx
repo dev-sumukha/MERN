@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
-import { NavLink } from 'react-router-dom'
+import { json, NavLink , useNavigate} from 'react-router-dom'
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [user,setUser] = useState({
     name:"",email:"",phone:"",work:"",password:"",cpassword:""
   })
@@ -16,6 +17,35 @@ const Signup = () => {
     setUser({...user,[name]:value});
   }
   
+  const PostData = async (e)=>{
+    e.preventDefault();
+
+    const {name,email,phone,work,password,cpassword} = user;
+    const res = await fetch('/register', {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({
+        // we need to convert the data in string before sending the data
+        name,email,phone,work,password,cpassword
+      })
+    })
+
+    const data = await res.json(); // we get the response data from server
+
+    if(res.status === 422 || !data){
+      window.alert("invalid register");
+      console.log("invalid register")
+    } else {
+      window.alert("success register");
+      console.log("success register")
+
+      navigate('/signin')// redirect the page to login
+    }
+
+  }
+
   return (
     <>
       <section className="signup">
@@ -23,7 +53,7 @@ const Signup = () => {
           <div className="signup-content">
             <div className="signup-form">
               <h2 className="form-title">Sign Up</h2>
-              <form className='register-form' id='register-form'>
+              <form className='register-form' id='register-form' method='POST'>
 
                 <div className="form-group">
                   <label htmlFor="name">name</label>
@@ -56,7 +86,7 @@ const Signup = () => {
                 </div>
 
                 <div className="form-group form-button">
-                  <input type="submit" name='signup' id='signup' className='form-submit' value="register"/>
+                  <input type="submit" name='signup' id='signup' className='form-submit' value="register" onClick={PostData}/>
                 </div>
               </form>
 

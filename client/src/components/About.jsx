@@ -16,18 +16,18 @@ const About = () => {
                 <h6>web developer</h6>
                 <p className='profile-rating mt-3 mb-5'>RANKINGS <span>1/10</span> </p>
 
-                <ul class="nav nav-tabs" role='tablist'>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                <ul className="nav nav-tabs" role='tablist'>
+                  <li className="nav-item">
+                    <a className="nav-link active" aria-current="page" href="#">Active</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">Link</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">Link</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                  <li className="nav-item">
+                    <a className="nav-link disabled">Disabled</a>
                   </li>
                 </ul>
               </div>
