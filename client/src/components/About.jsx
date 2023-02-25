@@ -1,11 +1,42 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import profile from '../profile.jpeg'
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const callAboutPage = async ()=>{
+    try{
+      const res = await fetch('/about',{
+        method:'GET',
+        headers:{
+          Accept:'application/json',
+          "Content-Type":"application/json"
+        },
+        credentials:"include"// it includes the cookies
+      });
+      const data = await res.json();
+      console.log(data)
+
+      if(!res.status === 200){
+        const error = new Error(res.error);
+        throw error;
+      } 
+    } catch(err){
+      console.log(err);
+      navigate('/login',{replace:true})
+    }
+  }
+
+  useEffect(()=>{
+    callAboutPage();
+  },[]);
+
   return (
     <>
       <div className="container emp-profile">
-        <form method="POST">
+        <form method="GET">
           <div className="row">
             <div className="col-md-4">
               <img src={profile} alt="" height='200'/>
